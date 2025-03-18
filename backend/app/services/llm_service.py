@@ -5,7 +5,7 @@ import json
 class LLMService:
     def __init__(self):
         self.ollama_url = "http://localhost:11434/api/generate"
-        self.model = "llama2"  # or any other model you have in Ollama
+        self.model = "llama3"  # or any other model you have in Ollama
 
     async def generate_questions(self, count: int) -> List[dict]:
         prompt = f"""Generate {count} objective questions to measure emotional intelligence. 
