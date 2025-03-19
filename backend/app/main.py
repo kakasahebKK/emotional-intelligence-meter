@@ -35,6 +35,7 @@ async def get_questions():
         questions = await llm_service.generate_questions(10)
         return {"questions": questions}
     except Exception as e:
+        print('DEBUg---3--->', str(e))
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/submit")
