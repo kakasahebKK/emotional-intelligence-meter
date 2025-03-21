@@ -32,6 +32,7 @@ class QuizSubmission(BaseModel):
 async def get_questions():
     try:
         # Get questions from LLM
+        # TODO: this call is timing out, need to fix
         questions = await llm_service.generate_questions(10)
         return {"questions": questions}
     except Exception as e:
