@@ -26,7 +26,6 @@ class LLMService:
                 prompt=prompt,
                 stream=False
             )
-            print('Response received:', response)
             try:
                 questions = json.loads(response['response'])
                 return questions

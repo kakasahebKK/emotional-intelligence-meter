@@ -20,17 +20,23 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
   const [score, setScore] = useState(null);
   const [feedback, setFeedback] = useState('');
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    fetchQuestions();
+    // Using a flag to ensure it only runs once, even in Strict Mode
+    if (!initialized) {
+      setInitialized(true);
+      fetchQuestions();
+    }
   }, []);
 
   const fetchQuestions = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/questions`);
       setQuestions(response.data.questions);
       setAnswers(new Array(response.data.questions.length).fill(null));
