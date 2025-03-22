@@ -38,6 +38,7 @@ emotional-intelligence-meter/
    - Windows: `venv\Scripts\activate`
    - Unix/MacOS: `source .venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
+5. Set environment variable: `OLLAMA_HOST=http://localhost:11434`
 5. Run the server: `uvicorn app.main:app --reload`
 
 ### Frontend Setup
