@@ -24,14 +24,9 @@ function App() {
   const [quizComplete, setQuizComplete] = useState(false);
   const [score, setScore] = useState(null);
   const [feedback, setFeedback] = useState('');
-  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    // Using a flag to ensure it only runs once, even in Strict Mode
-    if (!initialized) {
-      setInitialized(true);
-      fetchQuestions();
-    }
+    fetchQuestions();
   }, []);
 
   const fetchQuestions = async () => {

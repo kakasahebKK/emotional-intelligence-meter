@@ -27,6 +27,7 @@ class LLMService:
                 stream=False
             )
             try:
+                print('Response received:', response)
                 questions = json.loads(response['response'])
                 return questions
             except json.JSONDecodeError:
