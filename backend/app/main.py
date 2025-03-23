@@ -25,14 +25,18 @@ class Question(BaseModel):
     options: List[str]
     correct_option: int
 
+class Answer(BaseModel):
+    question: str
+    answer: str
+
 class QuizSubmission(BaseModel):
-    answers: List[int]
+    answers: List[Answer]
 
 @app.get("/api/questions")
 async def get_questions():
     try:
         # Get questions from LLM
-        questions = await llm_service.generate_questions(10)
+        questions = await llm_service.generate_questions(5)
         return {"questions": questions}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

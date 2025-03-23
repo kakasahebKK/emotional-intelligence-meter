@@ -8,13 +8,12 @@ class LLMService:
 
     async def generate_questions(self, count: int) -> List[dict]:
         prompt = f"""Generate {count} objective questions to measure emotional intelligence. 
-        Each question should have 4 options (A, B, C, D) and one correct answer.
+        Each question should have 4 options
         Format the response as a JSON array of objects with the following structure:
         {{
             "id": number,
             "question": "question text",
-            "options": ["option A", "option B", "option C", "option D"],
-            "correct_option": number (0-3)
+            "options": ["option 1", "option 2", "option 3", "option 4"],
         }}
         Make sure the questions are diverse and cover different aspects of emotional intelligence.
         Make sure that response is a valid JSON array, don't include any other text or characters, this is very important."""
@@ -36,15 +35,16 @@ class LLMService:
             print(f"Error generating questions: {str(e)}")
             raise
 
-    async def evaluate_answers(self, answers: List[int]) -> Tuple[float, str]:
-        prompt = f"""Evaluate these answers to emotional intelligence questions: {answers}
+    async def evaluate_answers(self, answers: List[dict]) -> Tuple[float, str]:
+        prompt = f"""Evaluate these answers to emotional intelligence questions: {json.dumps(answers)}
         Provide a score out of 10 and detailed feedback on the emotional intelligence level.
         Format the response as a JSON object with the following structure:
         {{
             "score": number (0-10),
             "feedback": "detailed feedback text"
-        }}"""
-
+        }}
+        Make sure that response is a valid JSON object, don't include any other text or characters, this is very important."""
+        print('evaluate_answers Prompt:', prompt)
         try:
             print('Evaluating answers using Ollama...')
             response = ollama.generate(
@@ -52,7 +52,7 @@ class LLMService:
                 prompt=prompt,
                 stream=False
             )
-            
+
             print('Response received:', response)
             try:
                 result = json.loads(response['response'])

@@ -34,7 +34,7 @@ function App() {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/questions`);
       setQuestions(response.data.questions);
-      setAnswers(new Array(response.data.questions.length).fill(null));
+      setAnswers(new Array(response.data.questions.length).fill({}));
       setLoading(false);
     } catch (error) {
       console.error('Error fetching questions:', error);
@@ -43,8 +43,11 @@ function App() {
   };
 
   const handleAnswerChange = (event) => {
+    const answer_index = parseInt(event.target.value);
     const newAnswers = [...answers];
-    newAnswers[currentQuestion] = parseInt(event.target.value);
+    const question = questions[currentQuestion];
+    const answer = question.options[answer_index - 1];
+    newAnswers[currentQuestion] = {question: question.question, answer: answer, answer_index: answer_index};
     setAnswers(newAnswers);
   };
 
@@ -65,7 +68,12 @@ function App() {
   const submitQuiz = async () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/submit`, {
-        answers: answers,
+        answers: answers.map(answer => {
+          return {
+            question: answer.question,
+            answer: answer.answer
+          }
+        }),
       });
       setScore(response.data.score);
       setFeedback(response.data.feedback);
@@ -128,7 +136,7 @@ function App() {
           </Typography>
           <FormControl component="fieldset" sx={{ mt: 2 }}>
             <RadioGroup
-              value={answers[currentQuestion] || ''}
+              value={answers[currentQuestion]?.answer_index || ''}
               onChange={handleAnswerChange}
             >
               {questions[currentQuestion]?.options.map((option, index) => (
