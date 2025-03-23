@@ -16,8 +16,8 @@ class LLMService:
             "options": ["option A", "option B", "option C", "option D"],
             "correct_option": number (0-3)
         }}
-        Make sure that response is a valid JSON array, don't include any other text or characters.
-        Make sure the questions are diverse and cover different aspects of emotional intelligence."""
+        Make sure the questions are diverse and cover different aspects of emotional intelligence.
+        Make sure that response is a valid JSON array, don't include any other text or characters, this is very important."""
 
         try:
             print('Generating questions using Ollama...')

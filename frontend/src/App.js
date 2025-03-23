@@ -134,7 +134,7 @@ function App() {
               {questions[currentQuestion]?.options.map((option, index) => (
                 <FormControlLabel
                   key={index}
-                  value={index}
+                  value={index+1}
                   control={<Radio />}
                   label={option}
                 />
