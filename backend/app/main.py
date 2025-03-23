@@ -26,11 +26,12 @@ class Question(BaseModel):
     correct_option: int
 
 class Answer(BaseModel):
+    id: int
     question: str
     answer: str
 
 class QuizSubmission(BaseModel):
-    answers: List[Answer]
+    submissions: List[Answer]
 
 @app.get("/api/questions")
 async def get_questions():
@@ -45,7 +46,7 @@ async def get_questions():
 async def submit_quiz(submission: QuizSubmission):
     try:
         # Evaluate answers using LLM
-        score, feedback = await llm_service.evaluate_answers(submission.answers)
+        score, feedback = await llm_service.evaluate_answers(submission.model_dump_json())
         return {
             "score": score,
             "feedback": feedback

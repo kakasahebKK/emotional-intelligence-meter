@@ -47,7 +47,7 @@ function App() {
     const newAnswers = [...answers];
     const question = questions[currentQuestion];
     const answer = question.options[answer_index - 1];
-    newAnswers[currentQuestion] = {question: question.question, answer: answer, answer_index: answer_index};
+    newAnswers[currentQuestion] = {id: currentQuestion, question: question.question, answer: answer, answer_index: answer_index};
     setAnswers(newAnswers);
   };
 
@@ -67,9 +67,11 @@ function App() {
 
   const submitQuiz = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/submit`, {
-        answers: answers.map(answer => {
+        submissions: answers.map(answer => {
           return {
+            id: answer.id,
             question: answer.question,
             answer: answer.answer
           }
@@ -78,8 +80,10 @@ function App() {
       setScore(response.data.score);
       setFeedback(response.data.feedback);
       setQuizComplete(true);
+      setLoading(false);
     } catch (error) {
       console.error('Error submitting quiz:', error);
+      setLoading(false);
     }
   };
 

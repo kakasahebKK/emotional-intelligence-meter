@@ -26,7 +26,6 @@ class LLMService:
                 stream=False
             )
             try:
-                print('Response received:', response)
                 questions = json.loads(response['response'])
                 return questions
             except json.JSONDecodeError:
@@ -35,8 +34,8 @@ class LLMService:
             print(f"Error generating questions: {str(e)}")
             raise
 
-    async def evaluate_answers(self, answers: List[dict]) -> Tuple[float, str]:
-        prompt = f"""Evaluate these answers to emotional intelligence questions: {json.dumps(answers)}
+    async def evaluate_answers(self, answers: str) -> Tuple[float, str]:
+        prompt = f"""Evaluate these answers to emotional intelligence questions: {answers}
         Provide a score out of 10 and detailed feedback on the emotional intelligence level.
         Format the response as a JSON object with the following structure:
         {{
