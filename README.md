@@ -62,6 +62,7 @@ emotional-intelligence-meter/
 
 ## API Endpoints
 
+- `GET /api/health`: Basic health check of the API server
 - `GET /api/questions`: Get 10 random questions
 - `POST /api/submit`: Submit quiz answers and get evaluation
-- `GET /api/score`: Get detailed score and feedback
+
