@@ -39,6 +39,20 @@ emotional-intelligence-meter/
 
 ### Backend Setup
 
+#### Required Ollama Models
+
+Ensure you have the necessary models pulled in Ollama:
+```
+ollama pull llama3
+```
+
+Ensure Ollama is running:
+```
+ollama serve
+```
+
+#### Start backend
+
 1. Navigate to the backend directory
 2. Create a virtual environment: `python -m venv .venv`
 3. Activate the virtual environment:
