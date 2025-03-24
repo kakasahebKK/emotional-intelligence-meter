@@ -47,7 +47,7 @@ function App() {
     const newAnswers = [...answers];
     const question = questions[currentQuestion];
     const answer = question.options[answer_index - 1];
-    newAnswers[currentQuestion] = {id: currentQuestion, question: question.question, answer: answer, answer_index: answer_index};
+    newAnswers[currentQuestion] = { id: currentQuestion, question: question.question, answer: answer, answer_index: answer_index };
     setAnswers(newAnswers);
   };
 
@@ -146,7 +146,7 @@ function App() {
               {questions[currentQuestion]?.options.map((option, index) => (
                 <FormControlLabel
                   key={index}
-                  value={index+1}
+                  value={index + 1}
                   control={<Radio />}
                   label={option}
                 />

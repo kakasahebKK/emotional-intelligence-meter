@@ -43,7 +43,7 @@ class LLMService:
             "feedback": "detailed feedback text"
         }}
         Make sure that response is a valid JSON object, don't include any other text or characters, this is very important."""
-        print('evaluate_answers Prompt:', prompt)
+
         try:
             print('Evaluating answers using Ollama...')
             response = ollama.generate(
@@ -60,4 +60,4 @@ class LLMService:
                 raise Exception("Invalid response format from LLM")
         except Exception as e:
             print(f"Error evaluating answers: {str(e)}")
-            raise 
+            raise

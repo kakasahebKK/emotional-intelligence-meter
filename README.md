@@ -17,41 +17,48 @@ emotional-intelligence-meter/
 ├── backend/                 # FastAPI backend
 │   ├── app/
 │   │   ├── main.py
-│   │   ├── models.py
 │   │   └── services/
 │   │       └── llm_service.py
 │   └── requirements.txt
 └── frontend/               # React frontend
+    ├── public/
+    │   └── index.html
     ├── src/
-    │   ├── components/
-    │   ├── services/
     │   └── App.js
+    │   └── index.js
     └── package.json
 ```
 
 ## Setup Instructions
 
 ### Backend Setup
+
 1. Navigate to the backend directory
 2. Create a virtual environment: `python -m venv .venv`
 3. Activate the virtual environment:
    - Windows: `venv\Scripts\activate`
    - Unix/MacOS: `source .venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
-5. Set environment variable: `OLLAMA_HOST=http://localhost:11434`
-5. Run the server: `uvicorn app.main:app --reload`
+5. Set environment variable to point Ollama instance, the default is: `OLLAMA_HOST=http://localhost:11434`
+6. Run the server: `uvicorn app.main:app --reload`
 
 ### Frontend Setup
+
 1. Navigate to the frontend directory
 2. Install dependencies: `npm install`
 3. Start the development server: `npm start`
+
+### Screenshots
+![Quiz Interface](screenshot-1.png)
+![Quiz Interface](screenshot-2.png)
+
 
 ## Technologies Used
 
 - Frontend: React, Material-UI
 - Backend: FastAPI, Python
-- LLM: Ollama
-- Database: SQLite (for storing questions and results)
+- LLM: llama3 hosted on Ollama
+
 
 ## API Endpoints
 

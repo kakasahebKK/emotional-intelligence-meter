@@ -1,8 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional
-import random
+from typing import List
 from .services.llm_service import LLMService
 
 app = FastAPI(title="Emotional Intelligence Meter API")
@@ -37,7 +36,7 @@ class QuizSubmission(BaseModel):
 async def get_questions():
     try:
         # Get questions from LLM
-        questions = await llm_service.generate_questions(5)
+        questions = await llm_service.generate_questions(10)
         return {"questions": questions}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -56,4 +55,4 @@ async def submit_quiz(submission: QuizSubmission):
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "healthy"} 
+    return {"status": "healthy"}
