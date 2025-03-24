@@ -10,6 +10,12 @@ A full-stack application for measuring emotional intelligence through an interac
 - Emotional intelligence scoring (out of 10)
 - Detailed feedback and analysis
 
+## Prerequisites
+
+- Python 3.12+
+- NodeJS 20+
+- [Ollama](https://ollama.com/) installed and running locally
+
 ## Project Structure
 
 ```
