@@ -51,8 +51,6 @@ class LLMService:
                 prompt=prompt,
                 stream=False
             )
-
-            print('Response received:', response)
             try:
                 result = json.loads(response['response'])
                 return result["score"], result["feedback"]
